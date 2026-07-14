@@ -1170,23 +1170,52 @@ window.saveManualClock = saveManualClock;
 // ============================================================
 // 班別設定
 // ============================================================
+// 生成小時選單
+function makeHourSelect(id, val) {
+  var selStyle = 'padding:8px 4px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;background:white;color:#333;cursor:pointer;';
+  var h = parseInt((val||'09:00').split(':')[0], 10);
+  var html = '<select id="' + id + '" style="' + selStyle + '">';
+  for (var hh = 0; hh <= 23; hh++) {
+    var label = hh + '時';
+    html += '<option value="' + (hh < 10 ? '0'+hh : hh) + '"' + (hh === h ? ' selected' : '') + '>' + label + '</option>';
+  }
+  html += '</select>';
+  return html;
+}
+// 生成分鐘選單
+function makeMinSelect(id, val) {
+  var selStyle = 'padding:8px 4px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;background:white;color:#333;cursor:pointer;';
+  var m = parseInt((val||'09:00').split(':')[1], 10);
+  var html = '<select id="' + id + '" style="' + selStyle + '">';
+  [0, 15, 30, 45].forEach(function(mm) {
+    var label = (mm < 10 ? '0'+mm : mm) + '分';
+    html += '<option value="' + (mm < 10 ? '0'+mm : mm) + '"' + (mm === m ? ' selected' : '') + '>' + label + '</option>';
+  });
+  html += '</select>';
+  return html;
+}
+
 function renderShiftRows() {
   var container = document.getElementById('shiftsContainer');
   if (!container) return;
   var shifts = sysSettings.shifts || [];
   var html = '';
   shifts.forEach(function(s, i) {
-    html += '<div class="shift-row" style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;">';
+    var startH = (s.start||'09:00').split(':')[0];
+    var startM = (s.start||'09:00').split(':')[1];
+    var endH   = (s.end||'18:00').split(':')[0];
+    var endM   = (s.end||'18:00').split(':')[1];
+    html += '<div class="shift-row" style="display:flex;align-items:center;gap:6px;margin-bottom:14px;flex-wrap:wrap;padding:10px;background:#f8f9fa;border-radius:10px;">';
     // 班別名稱
     html += '<input type="text" id="sShiftName_' + i + '" value="' + (s.name||'') + '" placeholder="班別名稱"'
-          + ' style="flex:1;min-width:80px;padding:10px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;background:white;color:#333;-webkit-appearance:none;">';
-    // 開始時間
-    html += '<input type="time" id="sShiftStart_' + i + '" value="' + (s.start||'09:00') + '"'
-          + ' style="width:120px;padding:10px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;background:white;color:#333;-webkit-appearance:none;cursor:pointer;">';
-    html += '<span style="color:#888;">–</span>';
-    // 結束時間
-    html += '<input type="time" id="sShiftEnd_' + i + '" value="' + (s.end||'18:00') + '"'
-          + ' style="width:120px;padding:10px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;background:white;color:#333;-webkit-appearance:none;cursor:pointer;">';
+          + ' style="flex:1;min-width:70px;max-width:90px;padding:8px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;background:white;color:#333;">';
+    // 開始時間：小時 + 分鐘
+    html += makeHourSelect('sShiftStartH_' + i, s.start||'09:00');
+    html += makeMinSelect('sShiftStartM_' + i, s.start||'09:00');
+    html += '<span style="color:#888;font-weight:bold;">–</span>';
+    // 結束時間：小時 + 分鐘
+    html += makeHourSelect('sShiftEndH_' + i, s.end||'18:00');
+    html += makeMinSelect('sShiftEndM_' + i, s.end||'18:00');
     html += '<button class="btn btn-sm btn-danger" onclick="removeShiftRow(' + i + ')" style="flex-shrink:0;">刪除</button>';
     html += '</div>';
   });
@@ -1212,10 +1241,14 @@ function saveShiftSettings() {
   var shifts = [];
   var valid = true;
   rows.forEach(function(row, i) {
-    var name  = document.getElementById('sShiftName_' + i).value.trim();
-    var start = document.getElementById('sShiftStart_' + i).value;
-    var end   = document.getElementById('sShiftEnd_' + i).value;
-    if (!name || !start || !end) { showToast('請填寫完整的班別資訊', 'error'); valid = false; return; }
+    var name   = document.getElementById('sShiftName_' + i).value.trim();
+    var startH = document.getElementById('sShiftStartH_' + i).value;
+    var startM = document.getElementById('sShiftStartM_' + i).value;
+    var endH   = document.getElementById('sShiftEndH_' + i).value;
+    var endM   = document.getElementById('sShiftEndM_' + i).value;
+    var start  = startH + ':' + startM;
+    var end    = endH   + ':' + endM;
+    if (!name) { showToast('請填寫班別名稱', 'error'); valid = false; return; }
     shifts.push({ name: name, start: start, end: end });
   });
   if (!valid || shifts.length === 0) return;
