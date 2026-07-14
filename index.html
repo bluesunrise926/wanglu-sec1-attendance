@@ -24,7 +24,6 @@
 
   <!-- 登入畫面 -->
   <div id="loginScreen" class="screen active">
-    <div class="login-bg"></div>
     <div class="login-container">
       <div class="logo">
         <div class="logo-icon">🏮</div>
@@ -49,7 +48,7 @@
         <button class="btn btn-primary btn-full" id="loginBtn" onclick="handleLogin()">登入</button>
         <div class="register-link-row">
           <span>第一次使用？</span>
-          <a href="#" onclick="showRegisterScreen()">員工自助註冊</a>
+          <button type="button" onclick="showRegisterScreen()" style="background:none;border:none;color:#4361ee;font-size:13px;font-weight:600;cursor:pointer;padding:0;text-decoration:underline;">員工自助註冊</button>
         </div>
         <p class="login-note">登入帳號為您的電話號碼，如有問題請聯絡管理員</p>
       </div>
@@ -58,7 +57,6 @@
 
   <!-- 自助註冊畫面 -->
   <div id="registerScreen" class="screen">
-    <div class="login-bg"></div>
     <div class="login-container">
       <div class="logo">
         <div class="logo-icon">📝</div>
@@ -105,7 +103,7 @@
         </div>
         <button class="btn btn-primary btn-full" id="regBtn" onclick="handleRegister()">完成註冊並登入</button>
         <div class="register-link-row">
-          <a href="#" onclick="showLoginScreen()">← 返回登入</a>
+          <button type="button" onclick="showLoginScreen()" style="background:none;border:none;color:#4361ee;font-size:13px;font-weight:600;cursor:pointer;padding:0;text-decoration:underline;">← 返回登入</button>
         </div>
       </div>
     </div>
