@@ -1,14 +1,24 @@
 {
-  "name": "老王客家莊五權總店打卡系統",
-  "short_name": "五權打卡",
-  "description": "老王客家莊五權總店員工打卡系統",
+  "name": "老王客家莊五權總店打卡",
+  "short_name": "老王打卡",
+  "description": "老王客家莊五權總店員工出勤打卡系統",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1a1a2e",
   "theme_color": "#1a1a2e",
   "orientation": "portrait",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
