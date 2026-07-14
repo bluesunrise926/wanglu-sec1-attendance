@@ -1176,12 +1176,18 @@ function renderShiftRows() {
   var shifts = sysSettings.shifts || [];
   var html = '';
   shifts.forEach(function(s, i) {
-    html += '<div class="shift-row">';
-    html += '<input type="text" id="sShiftName_' + i + '" value="' + (s.name||'') + '" placeholder="班別名稱" class="shift-input">';
-    html += '<input type="time" id="sShiftStart_' + i + '" value="' + (s.start||'') + '" class="shift-input">';
-    html += '<span>–</span>';
-    html += '<input type="time" id="sShiftEnd_' + i + '" value="' + (s.end||'') + '" class="shift-input">';
-    html += '<button class="btn btn-sm btn-danger shift-del-btn" onclick="removeShiftRow(' + i + ')">刪除</button>';
+    html += '<div class="shift-row" style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;">';
+    // 班別名稱
+    html += '<input type="text" id="sShiftName_' + i + '" value="' + (s.name||'') + '" placeholder="班別名稱"'
+          + ' style="flex:1;min-width:80px;padding:10px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;background:white;color:#333;-webkit-appearance:none;">';
+    // 開始時間
+    html += '<input type="time" id="sShiftStart_' + i + '" value="' + (s.start||'09:00') + '"'
+          + ' style="width:120px;padding:10px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;background:white;color:#333;-webkit-appearance:none;cursor:pointer;">';
+    html += '<span style="color:#888;">–</span>';
+    // 結束時間
+    html += '<input type="time" id="sShiftEnd_' + i + '" value="' + (s.end||'18:00') + '"'
+          + ' style="width:120px;padding:10px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;background:white;color:#333;-webkit-appearance:none;cursor:pointer;">';
+    html += '<button class="btn btn-sm btn-danger" onclick="removeShiftRow(' + i + ')" style="flex-shrink:0;">刪除</button>';
     html += '</div>';
   });
   container.innerHTML = html;
