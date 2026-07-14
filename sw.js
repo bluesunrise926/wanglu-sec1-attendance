@@ -1,6 +1,6 @@
 // Service Worker — 老王客家莊五權總店打卡系統 PWA
-// v1：網路優先策略，確保永遠載入最新版本
-const CACHE_NAME = 'wanglu-sec1-v2';
+// v1：全新部署，清除所有舊快取
+const CACHE_NAME = 'wanglu-sec1-v1';
 const CACHE_FILES = ['/', '/index.html', '/manifest.json'];
 
 self.addEventListener('install', e => {
