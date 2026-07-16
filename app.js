@@ -1770,3 +1770,26 @@ function togglePwd(inputId, btn) {
   }
 }
 window.togglePwd = togglePwd;
+
+// ============================================================
+// 即時密碼一致性檢查
+// ============================================================
+function checkPwdMatch() {
+  var pwd  = document.getElementById('regPwd').value;
+  var pwd2 = document.getElementById('regPwd2').value;
+  var hint = document.getElementById('pwdMatchHint');
+  if (!hint) return;
+  if (!pwd2) {
+    hint.textContent = '';
+    hint.className   = 'pwd-match-hint';
+    return;
+  }
+  if (pwd === pwd2) {
+    hint.textContent = '✔ 密碼一致';
+    hint.className   = 'pwd-match-hint match';
+  } else {
+    hint.textContent = '✖ 密碼不一致，請重新輸入';
+    hint.className   = 'pwd-match-hint no-match';
+  }
+}
+window.checkPwdMatch = checkPwdMatch;
