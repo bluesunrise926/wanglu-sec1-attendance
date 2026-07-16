@@ -1752,3 +1752,21 @@ window.removeShiftRow     = removeShiftRow;
 window.useMyLocation      = useMyLocation;
 window.exportAttendanceCSV  = exportAttendanceCSV;
 window.exportWorkStatsCSV   = exportWorkStatsCSV;
+
+// ============================================================
+// 密碼顯示 / 隱藏切換
+// ============================================================
+function togglePwd(inputId, btn) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
+  if (input.getAttribute('type') === 'password') {
+    input.setAttribute('type', 'text');
+    btn.textContent = '🙈';
+    btn.title = '隱藏密碼';
+  } else {
+    input.setAttribute('type', 'password');
+    btn.textContent = '👁';
+    btn.title = '顯示密碼';
+  }
+}
+window.togglePwd = togglePwd;
