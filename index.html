@@ -88,9 +88,10 @@
           <div class="form-group">
             <label>確認密碼 <span class="required">*</span></label>
             <div class="password-container">
-              <input type="password" id="regPwd2" placeholder="再輸入一次">
+              <input type="password" id="regPwd2" placeholder="再輸入一次" oninput="checkPwdMatch()">
               <span class="toggle-btn" onclick="togglePwd('regPwd2', this)">👁</span>
             </div>
+            <span id="pwdMatchHint" class="pwd-match-hint"></span>
           </div>
         </div>
         <div class="form-group">
