@@ -77,6 +77,12 @@ body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background
 .btn-link { background: none; border: none; color: var(--primary); font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: underline; padding: 0; }
 .btn-link:hover { color: var(--primary-dark); }
 
+/* 密碼顯示/隱藏切換 */
+.password-container { position: relative; width: 100%; }
+.password-container input { width: 100%; padding-right: 44px; box-sizing: border-box; }
+.toggle-btn { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa; font-size: 16px; user-select: none; line-height: 1; transition: color 0.2s; }
+.toggle-btn:hover { color: var(--primary); }
+
 /* 身分證資訊區塊 */
 .id-upload-notice { display: flex; align-items: flex-start; gap: 10px; background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
 .id-notice-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
