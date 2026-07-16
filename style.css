@@ -83,6 +83,11 @@ body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background
 .toggle-btn { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa; font-size: 16px; user-select: none; line-height: 1; transition: color 0.2s; }
 .toggle-btn:hover { color: var(--primary); }
 
+/* 密碼一致性即時提示 */
+.pwd-match-hint { display: block; font-size: 12px; margin-top: 5px; min-height: 16px; font-weight: 600; transition: color 0.2s; }
+.pwd-match-hint.match   { color: #16a34a; }
+.pwd-match-hint.no-match { color: #dc2626; }
+
 /* 身分證資訊區塊 */
 .id-upload-notice { display: flex; align-items: flex-start; gap: 10px; background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
 .id-notice-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
